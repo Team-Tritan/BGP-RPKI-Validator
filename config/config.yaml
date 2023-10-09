@@ -1,0 +1,4 @@
+APP_NAME: "RPKI Validator"
+VERSION: "0.0.1"
+LOG_LEVEL: "info"
+HTTP_PORT: ":8080"
