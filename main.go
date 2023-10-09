@@ -45,3 +45,4 @@ func startServer(app *fiber.App) {
         log.Fatalf("Error starting server: %v", err)
     }
 }
+

@@ -21,7 +21,7 @@ type Debug struct {
     Code  int  `json:"code"`
 }
 
-func NewIndexController(c *fiber.Ctx) error {
+func ApiIndexController(c *fiber.Ctx) error {
     endpoints := []Endpoint{
         {
             Name:    "Prefix Search",
