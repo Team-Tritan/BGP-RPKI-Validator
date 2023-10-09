@@ -25,13 +25,13 @@ func NewIndexController(c *fiber.Ctx) error {
     endpoints := []Endpoint{
         {
             Name:    "Prefix Search",
-            URL:     "/prefix?q={prefix}",
-            Example: "/prefix?q=23.142.248.0/24",
+            URL:     "/api/prefix?q={prefix}",
+            Example: "/api/prefix?q=23.142.248.0/24",
         },
         {
             Name:    "ASN Search",
-            URL:     "/asn?q={asn}",
-            Example: "/asn?q=393577",
+            URL:     "/api/asn?q={asn}",
+            Example: "/api/asn?q=393577",
         },
     }
 
