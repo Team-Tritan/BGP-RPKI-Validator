@@ -13,7 +13,6 @@ func CustomHeaders() fiber.Handler {
 		start := time.Now()
 		err := c.Next()
 		elapsedMilliseconds := time.Since(start).Milliseconds()
-
 		responseTime := fmt.Sprintf("%.1fms", float64(elapsedMilliseconds))
 
 		c.Set("X-Response-Time", responseTime)
