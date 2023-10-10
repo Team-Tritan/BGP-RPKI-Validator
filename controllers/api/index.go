@@ -10,7 +10,7 @@ import (
 type Endpoint struct {
     Name            string `json:"name"`
     Description     string `json:"description"`
-    RequiredQueries string `json:"required_url_queries"`
+    URLQueries string `json:"url_queries"`
     URL             string `json:"url"`
     Example         string `json:"example"`
 }
@@ -46,14 +46,14 @@ func ApiIndexController(c *fiber.Ctx) error {
         {
             Name:    "RPKI Prefix Search",
             Description: "Searches for a specific prefix or all ASN prefixes in the RPKI Validator.",
-            RequiredQueries: "as: AS Number",
+            URLQueries: "as: AS Number",
             URL:     "/api/rpki?q={prefix}&as={asn}",
             Example: "/api/rpki?as=393577",
         },
         {
             Name:    "ASN Prefix Search",
             Description: "Returns all prefixes for a given ASN.",
-            RequiredQueries: "q: AS Number",
+            URLQueries: "q: AS Number",
             URL:     "/api/prefixes?q={asn}",
             Example: "/api/prefixes?q=393577",
 
