@@ -13,9 +13,10 @@ func NewRouter(app *fiber.App) error {
         return c.SendString("Hello, World 👋!")
     })
 
-    // TODO: Add API versioning, asn and prefix fetch
     apiGroup := app.Group("/api")
     apiGroup.Get("/", controllers.ApiIndexController)
+    apiGroup.Get("/rpki", controllers.RPKISearchController)
+    apiGroup.Get("/prefixes", controllers.PrefixSearchController)
 
     return nil
 }
