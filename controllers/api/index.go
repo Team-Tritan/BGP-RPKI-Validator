@@ -8,10 +8,11 @@ import (
 )
 
 type Endpoint struct {
-    Name        string `json:"name"`
-    Description string `json:"description"`
-    URL         string `json:"url"`
-    Example     string `json:"example"`
+    Name            string `json:"name"`
+    Description     string `json:"description"`
+    RequiredQueries string `json:"required_url_queries"`
+    URL             string `json:"url"`
+    Example         string `json:"example"`
 }
 
 type Response struct {
@@ -44,20 +45,23 @@ func ApiIndexController(c *fiber.Ctx) error {
     endpoints := []Endpoint{
         {
             Name:    "RPKI Prefix Search",
-            Description: "Searches for a prefix in the RPKI Validator.",
+            Description: "Searches for a specific prefix or all ASN prefixes in the RPKI Validator.",
+            RequiredQueries: "as: AS Number",
             URL:     "/api/rpki?q={prefix}&as={asn}",
-            Example: "/api/rpki?q=23.142.248.0/24&as=393577",
+            Example: "/api/rpki?as=393577",
         },
         {
             Name:    "ASN Prefix Search",
             Description: "Returns all prefixes for a given ASN.",
+            RequiredQueries: "q: AS Number",
             URL:     "/api/prefixes?q={asn}",
             Example: "/api/prefixes?q=393577",
+
         },
     }
 
     response := Response{
-        Message: "Hello! Welcome to our bgp toolkit API!",
+        Message: "Welcome to our rpki.online, a bgp toolkit API!",
         Endpoints: endpoints,
         Debug: Debug{
             Error: false,
