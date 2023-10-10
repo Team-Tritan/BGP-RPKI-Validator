@@ -4,13 +4,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gofiber/fiber/v2"
-
 )
 
 type ASNData struct {
-	Type  string   `json:"type"`
-	ASNs  []string `json:"asns"`
-	Meta  interface{} `json:"meta"`
+	Type   string `json:"type"`
+	ASNs   []string `json:"asns"`
+	Meta   interface{} `json:"meta"`
 	Result struct {
 		Relations []struct {
 			Type    string `json:"type"`
@@ -27,12 +26,8 @@ type ASNData struct {
 }
 
 type ASNSearchResponse struct {
-	Prefix  string   `json:"prefix"`
-	Meta    []struct {
-		SourceType string   `json:"sourceType"`
-		SourceID   string   `json:"sourceID"`
-		OriginASNs []string `json:"originASNs"`
-	} `json:"meta"`
+	Prefix string   `json:"prefix"`
+	ASN    string   `json:"origin_asn"`
 }
 
 func PrefixSearchController(c *fiber.Ctx) error {
@@ -72,12 +67,22 @@ func PrefixSearchController(c *fiber.Ctx) error {
 		})
 	}
 
+	if len(asnData.Result.Relations) == 0 || len(asnData.Result.Relations[0].Members) == 0 {
+		return c.Status(404).JSON(map[string]interface{}{
+			"message": fmt.Sprintf("No prefixes found for ASN: %s", asn),
+			"debug": map[string]interface{}{
+				"error": true,
+				"code": 404,
+			},
+		})
+	}
+
 	var response []ASNSearchResponse
 	for _, relation := range asnData.Result.Relations {
 		for _, member := range relation.Members {
 			response = append(response, ASNSearchResponse{
 				Prefix: member.Prefix,
-				Meta:   member.Meta,
+				ASN:    asn,
 			})
 		}
 	}

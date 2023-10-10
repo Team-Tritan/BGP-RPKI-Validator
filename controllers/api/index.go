@@ -2,6 +2,9 @@ package controllers
 
 import (
     "github.com/gofiber/fiber/v2"
+
+    "io/ioutil"
+	"net/http"
 )
 
 type Endpoint struct {
@@ -20,6 +23,21 @@ type Response struct {
 type Debug struct {
     Error bool `json:"error"`
     Code  int  `json:"code"`
+}
+
+func makeAPIRequest(url string) ([]byte, int, error) {
+    resp, err := http.Get(url)
+    if err != nil {
+        return nil, 500, err
+    }
+    defer resp.Body.Close()
+
+    body, err := ioutil.ReadAll(resp.Body)
+    if err != nil {
+        return nil, 500, err
+    }
+
+    return body, resp.StatusCode, nil
 }
 
 func ApiIndexController(c *fiber.Ctx) error {

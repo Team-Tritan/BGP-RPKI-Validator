@@ -3,9 +3,7 @@ package controllers
 import (
     "encoding/json"
     "github.com/gofiber/fiber/v2"
-    "net/http"
     "fmt"
-    "io/ioutil"
 )
 
 type APISearchResponse struct {
@@ -66,19 +64,4 @@ func RPKISearchController(c *fiber.Ctx) error {
     }
 
     return c.Status(statusCode).JSON(responseStruct.ValidatedRoute)
-}
-
-func makeAPIRequest(url string) ([]byte, int, error) {
-    resp, err := http.Get(url)
-    if err != nil {
-        return nil, 500, err
-    }
-    defer resp.Body.Close()
-
-    body, err := ioutil.ReadAll(resp.Body)
-    if err != nil {
-        return nil, 500, err
-    }
-
-    return body, resp.StatusCode, nil
 }
