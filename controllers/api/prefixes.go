@@ -35,7 +35,7 @@ func PrefixSearchController(c *fiber.Ctx) error {
 
 	if asn == "" {
 		return c.Status(400).JSON(map[string]interface{}{
-			"message": "Please provide an ASN.",
+			"message": "Please provide an AS number.",
 			"debug": map[string]interface{}{
 				"error": true,
 				"code": 400,

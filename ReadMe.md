@@ -6,8 +6,8 @@ This is a simple api for validating RPKI records for an ASN's entire list of ann
 
 - /api/rpki?q={as number}
 
-  - @Returns [{ validated_route: { route: { prefix, origin_asn }, { validity: {state, description } }]
+  - @Returns [{ prefix, origin, rpki_state, description }]
 
 - /api/prefixes?q={as number}
 
-  - @Returns [{prefix, origin_asn}]
+  - @Returns [{ prefix, origin_asn }]
