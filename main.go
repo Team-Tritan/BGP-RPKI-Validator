@@ -27,7 +27,7 @@ func main() {
 
 func buildApp() *fiber.App {
     app := fiber.New()
-
+    
     app.Use(logger.New())
     app.Use(cors.New())
     app.Use(middleware.CustomHeaders())
