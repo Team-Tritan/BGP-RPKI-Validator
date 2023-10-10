@@ -19,7 +19,6 @@ func CustomHeaders() fiber.Handler {
 		c.Set("X-Developers", "Tritan Devs (AS393577)")
 		c.Set("X-Hello", "Why are you looking at the headers? Wanna join a team of devs and make cool stuff? https://discord.gg/http")
 
-
 		if err != nil {
 			log.Printf("Middleware error: %v", err)
 			return err
