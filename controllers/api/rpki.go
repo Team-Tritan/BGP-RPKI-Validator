@@ -43,7 +43,7 @@ type PrefixResponse struct {
 }
 
 func RPKISearchController(c *fiber.Ctx) error {
-    asn := c.Query("as")
+    asn := c.Query("q")
 
     if asn == "" {
         return c.Status(400).JSON(map[string]interface{}{

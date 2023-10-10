@@ -46,9 +46,9 @@ func ApiIndexController(c *fiber.Ctx) error {
         {
             Name:    "RPKI Prefix Search",
             Description: "Searches for a specific prefix or all ASN prefixes in the RPKI Validator.",
-            URLQueries: "as: AS Number",
-            URL:     "/api/rpki?q={prefix}&as={asn}",
-            Example: "/api/rpki?as=393577",
+            URLQueries: "q: AS Number",
+            URL:     "/api/rpki?q={asn}",
+            Example: "/api/rpki?q=393577",
         },
         {
             Name:    "ASN Prefix Search",
