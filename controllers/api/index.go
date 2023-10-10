@@ -5,9 +5,10 @@ import (
 )
 
 type Endpoint struct {
-    Name    string `json:"name"`
-    URL     string `json:"url"`
-    Example string `json:"example"`
+    Name        string `json:"name"`
+    Description string `json:"description"`
+    URL         string `json:"url"`
+    Example     string `json:"example"`
 }
 
 type Response struct {
@@ -24,19 +25,21 @@ type Debug struct {
 func ApiIndexController(c *fiber.Ctx) error {
     endpoints := []Endpoint{
         {
-            Name:    "Prefix Search",
-            URL:     "/api/prefix?q={prefix}",
-            Example: "/api/prefix?q=23.142.248.0/24",
+            Name:    "RPKI Prefix Search",
+            Description: "Searches for a prefix in the RPKI Validator.",
+            URL:     "/api/rpki?q={prefix}&as={asn}",
+            Example: "/api/rpki?q=23.142.248.0/24&as=393577",
         },
         {
-            Name:    "ASN Search",
-            URL:     "/api/asn?q={asn}",
-            Example: "/api/asn?q=393577",
+            Name:    "ASN Prefix Search",
+            Description: "Returns all prefixes for a given ASN.",
+            URL:     "/api/prefixes?q={asn}",
+            Example: "/api/prefixes?q=393577",
         },
     }
 
     response := Response{
-        Message: "Hello! Welcome to rpki.online, a simple RPKI prefix validator API.",
+        Message: "Hello! Welcome to our bgp toolkit API!",
         Endpoints: endpoints,
         Debug: Debug{
             Error: false,
